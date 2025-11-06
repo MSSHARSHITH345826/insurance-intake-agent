@@ -1,0 +1,140 @@
+.claims-table-widget {
+  background: white;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.table-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.table-header h2 {
+  font-size: 20px;
+  font-weight: 600;
+  color: #0E3846;
+  margin: 0;
+}
+
+.table-controls {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.status-filter {
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  background-color: white;
+  font-size: 14px;
+  color: #003946;
+  cursor: pointer;
+}
+
+.status-filter:focus {
+  outline: none;
+  border-color: #ECAB23;
+}
+
+.search-input {
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 14px;
+  min-width: 200px;
+  color: #003946;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: #ECAB23;
+  box-shadow: 0 0 0 3px rgba(236, 171, 35, 0.1);
+}
+
+.table-container {
+  overflow-x: auto;
+  max-height: 600px;
+  overflow-y: auto;
+}
+
+.claims-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.claims-table thead {
+  background-color: #f8f9fa;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.claims-table th {
+  padding: 12px;
+  text-align: left;
+  font-weight: 600;
+  color: #0E3846;
+  border-bottom: 2px solid #e9ecef;
+  cursor: pointer;
+  user-select: none;
+  white-space: nowrap;
+}
+
+.claims-table th:hover {
+  background-color: #e9ecef;
+}
+
+.claims-table td {
+  padding: 12px;
+  border-bottom: 1px solid #e9ecef;
+  color: #003946;
+}
+
+.claims-table tbody tr:hover {
+  background-color: #f8f9fa;
+}
+
+.status-badge {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.status-accepted {
+  background-color: rgba(40, 167, 69, 0.1);
+  color: #28a745;
+}
+
+.status-pending {
+  background-color: rgba(236, 171, 35, 0.1);
+  color: #ECAB23;
+}
+
+.status-denied {
+  background-color: rgba(220, 53, 69, 0.1);
+  color: #dc3545;
+}
+
+.no-results {
+  text-align: center;
+  padding: 40px;
+  color: #666;
+  font-style: italic;
+}
+
+.table-footer {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid #e9ecef;
+  color: #666;
+  font-size: 14px;
+}

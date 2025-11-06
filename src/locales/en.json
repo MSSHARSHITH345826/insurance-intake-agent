@@ -1,0 +1,72 @@
+{
+  "login": {
+    "title": "SunLife Digital Intake Portal",
+    "subtitle": "Insurance Claims Processing System",
+    "username": "Username",
+    "password": "Password",
+    "rememberMe": "Remember me",
+    "forgotPassword": "Forgot password?",
+    "signIn": "Sign In",
+    "language": "Language",
+    "error": "Invalid username or password"
+  },
+  "common": {
+    "english": "English",
+    "french": "Français"
+  },
+  "dashboard": {
+    "title": "Claims Dashboard",
+    "logout": "Logout",
+    "processedToday": "Processed Today",
+    "processedWeek": "Processed This Week",
+    "processedMonth": "Processed This Month",
+    "acceptedClaims": "Accepted Claims",
+    "pendingClaims": "Pending Claims",
+    "deniedClaims": "Denied Claims",
+    "geographicalDistribution": "Geographical Distribution",
+    "lastMonthData": "Data for last month",
+    "claimsList": "Claims List",
+    "total": "Total",
+    "accepted": "Accepted",
+    "pending": "Pending",
+    "denied": "Denied",
+    "allStatuses": "All Statuses",
+    "status": {
+      "accepted": "Accepted",
+      "pending": "Pending",
+      "denied": "Denied"
+    },
+    "claimNumber": "Claim Number",
+    "patientName": "Patient Name",
+    "memberId": "Member ID",
+    "city": "City",
+    "status": "Status",
+    "amount": "Amount",
+    "submittedDate": "Submitted Date",
+    "searchPlaceholder": "Search claims...",
+    "noResults": "No claims found matching your search criteria.",
+    "showing": "Showing {{count}} of {{total}} claims",
+    "chat": {
+      "title": "Chat Assistant",
+      "status": "Online",
+      "empty": "Start a conversation with the AI assistant",
+      "hint": "Ask questions about claims, processing, or get help with your tasks.",
+      "placeholder": "Type your message here...",
+      "send": "Send"
+    },
+    "timePeriods": {
+      "day": "Day",
+      "week": "Week",
+      "month": "Month",
+      "quarter": "Quarter"
+    },
+    "showGraph": "Show Graph",
+    "hideGraph": "Hide Graph",
+    "lineChart": "Line Chart",
+    "barChart": "Bar Chart",
+    "download": "Download",
+    "downloadGraph": "Download graph as PNG",
+    "heatmapLegend": "Heatmap Legend",
+    "heatmapExplanation": "Province colors indicate claim density. Circle size represents total claims. Hover over cities for detailed breakdown."
+  }
+}

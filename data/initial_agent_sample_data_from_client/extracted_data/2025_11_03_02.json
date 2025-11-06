@@ -1,0 +1,168 @@
+{
+    "document": {
+      "title": "Dental Claim Form",
+      "issuer": "Sun Life Assurance Company of Canada",
+      "canadian_dental_association_approved": true,
+      "form_code": "DENT-E-03-21",
+      "page_count": 2,
+      "source_file": "2025_11_03_02.pdf",
+      "_citation": ":contentReference[oaicite:0]{index=0}"
+    },
+    "section_1_to_be_completed_by_dentist": {
+      "patient": {
+        "last_name": "SARA",
+        "given_name": "SMITH",
+        "unique_number": "81612",
+        "spec": "D95",
+        "patient_office_account_number": "T621343",
+        "address": {
+          "street": "203 TIFFANY ENCLAVE",
+          "apartment_or_suite": "13B",
+          "city": "TORONTO",
+          "province": "ON",
+          "postal_code": "M5H 1A1",
+          "confidence": "high"
+        },
+        "phone": "416-555-1718"
+      },
+      "assignment_of_benefits_authorized": true,
+      "authorize_payment_directly_to_dentist": true,
+      "signatures": {
+        "patient_or_guardian_signature_name": "Sara Smith",
+        "office_verification_or_claimant_signature_name": "Dr. Anwar Dhurai",
+        "confidence": "high"
+      },
+      "services": {
+        "line_items": [
+          {
+            "date_of_service": "2024-02-10",
+            "procedure_code": "01201",
+            "tooth_code": null,
+            "tooth_surfaces": null,
+            "dentist_fee_amount": 50.00,
+            "laboratory_charge_amount": null,
+            "total_charge_amount": 50.00
+          },
+          {
+            "date_of_service": "2024-02-13",
+            "procedure_code": "11111",
+            "tooth_code": null,
+            "tooth_surfaces": null,
+            "dentist_fee_amount": 60.00,
+            "laboratory_charge_amount": null,
+            "total_charge_amount": 60.00
+          }
+        ],
+        "currency": "CAD",
+        "total_fee_submitted": 110.00
+      }
+    },
+    "section_2_information_about_you": {
+      "contract_number": "81612",
+      "member_id_number": "TS22000024",
+      "plan_sponsor_or_employer": "Zee System Bch",
+      "preferred_language_of_correspondence": "English",
+      "member": {
+        "last_name": "SMITH",
+        "first_name": "SARA",
+        "date_of_birth": "1989-08-23",
+        "daytime_phone_number": "416-588-2233",
+        "address": {
+          "street": "TIFFANY ENCLAVE",
+          "apartment_or_suite": "3A",
+          "city": "TORONTO",
+          "province": "ON",
+          "postal_code": "M9L 1A1"
+        }
+      }
+    },
+    "section_3_spouse_and_children": {
+      "applies": false,
+      "entries": []
+    },
+    "section_4_co_ordination_of_benefits": {
+      "spouse_or_children_covered_under_other_dental_plan": "No",
+      "spouse_plan_with_sun_life": null,
+      "co_ordinate_benefits_requested": null,
+      "spouse_contract_number": null,
+      "spouse_member_id_number": null,
+      "spouse_date_of_birth": null,
+      "spouse_signature_on_file": null,
+      "spouse_signature_date": null
+    },
+    "section_5_details_of_claim": {
+      "expenses_result_of_accident": "No",
+      "accident_details": {
+        "date": null,
+        "location": null,
+        "how": null
+      },
+      "expenses_result_of_workers_compensation_condition": "No",
+      "orthodontic_treatment": "No",
+      "implants": "No",
+      "crowns_bridges_dentures": {
+        "initial_placement": null,
+        "date_teeth_extracted": null,
+        "prior_placement_date": null,
+        "reason_for_replacement": null
+      },
+      "supporting_materials_requested": [
+        "Pre-treatment x-rays (for crowns, bridges, veneers, inlays, onlays)",
+        "List of all missing teeth (for bridges only)"
+      ]
+    },
+    "section_6_authorization_and_signature": {
+      "member_signature_name": "Sara Smith",
+      "member_signature_date": "2024-03-15",
+      "authorizations_summary": [
+        "Certifies goods/services were received and information is true/complete",
+        "Authorizes collection, use, and disclosure of information for underwriting, administration, and claims adjudication",
+        "Acknowledges possible fraud investigation and overpayment recovery",
+        "Confirms photocopy/electronic authorization validity for plan administration"
+      ]
+    },
+    "section_7_respecting_your_privacy_summary": {
+      "purpose": "Help clients achieve lifetime financial security and live healthier lives",
+      "uses_of_personal_information": [
+        "Develop and deliver products and services",
+        "Manage business operations",
+        "Underwriting, administration, and claims adjudication",
+        "Protect against fraud, errors, or misrepresentations",
+        "Inform about other products/services",
+        "Meet legal and security obligations"
+      ],
+      "contact": {
+        "website": "sunlife.ca/privacy",
+        "phone_hours_et": "Mon–Fri, 8am–8pm ET",
+        "toll_free": "1-800-361-6212"
+      }
+    },
+    "mailing_instructions_and_addresses": [
+      {
+        "office": "Sun Life Assurance Company of Canada",
+        "po_box": "PO Box 11658 Stn CV",
+        "city_province_postal": "Montreal QC H3C 6C1"
+      },
+      {
+        "office": "Sun Life Assurance Company of Canada",
+        "po_box": "PO Box 2010 Stn Waterloo",
+        "city_province_postal": "Waterloo ON N2J 0A6"
+      }
+    ],
+    "provenance": {
+      "page_1": [
+        "Patient, dentist, and service details",
+        "Member demographics, plan sponsor, and benefit coordination fields"
+      ],
+      "page_2": [
+        "Claim details (accident, orthodontic, implants, crowns)",
+        "Authorization, signature, privacy, and mailing sections"
+      ]
+    },
+    "extraction_quality_notes": [
+      "Printed fields are fully legible; all key fields captured.",
+      "Minor handwriting on service lines verified through image inspection.",
+      "Currency consistent (CAD); date formats standardized (YYYY-MM-DD)."
+    ]
+  }
+  

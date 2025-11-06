@@ -1,0 +1,72 @@
+{
+  "login": {
+    "title": "Portail de Prise en Charge Numérique SunLife",
+    "subtitle": "Système de Traitement des Réclamations d'Assurance",
+    "username": "Nom d'utilisateur",
+    "password": "Mot de passe",
+    "rememberMe": "Se souvenir de moi",
+    "forgotPassword": "Mot de passe oublié?",
+    "signIn": "Se connecter",
+    "language": "Langue",
+    "error": "Nom d'utilisateur ou mot de passe invalide"
+  },
+  "common": {
+    "english": "English",
+    "french": "Français"
+  },
+  "dashboard": {
+    "title": "Tableau de Bord des Réclamations",
+    "logout": "Déconnexion",
+    "processedToday": "Traitées Aujourd'hui",
+    "processedWeek": "Traitées Cette Semaine",
+    "processedMonth": "Traitées Ce Mois",
+    "acceptedClaims": "Réclamations Acceptées",
+    "pendingClaims": "Réclamations en Attente",
+    "deniedClaims": "Réclamations Refusées",
+    "geographicalDistribution": "Distribution Géographique",
+    "lastMonthData": "Données du mois dernier",
+    "claimsList": "Liste des Réclamations",
+    "total": "Total",
+    "accepted": "Accepté",
+    "pending": "En Attente",
+    "denied": "Refusé",
+    "allStatuses": "Tous les Statuts",
+    "status": {
+      "accepted": "Accepté",
+      "pending": "En Attente",
+      "denied": "Refusé"
+    },
+    "claimNumber": "Numéro de Réclamation",
+    "patientName": "Nom du Patient",
+    "memberId": "ID Membre",
+    "city": "Ville",
+    "status": "Statut",
+    "amount": "Montant",
+    "submittedDate": "Date de Soumission",
+    "searchPlaceholder": "Rechercher des réclamations...",
+    "noResults": "Aucune réclamation trouvée correspondant à vos critères de recherche.",
+    "showing": "Affichage de {{count}} sur {{total}} réclamations",
+    "chat": {
+      "title": "Assistant de Chat",
+      "status": "En Ligne",
+      "empty": "Démarrez une conversation avec l'assistant IA",
+      "hint": "Posez des questions sur les réclamations, le traitement ou obtenez de l'aide pour vos tâches.",
+      "placeholder": "Tapez votre message ici...",
+      "send": "Envoyer"
+    },
+    "timePeriods": {
+      "day": "Jour",
+      "week": "Semaine",
+      "month": "Mois",
+      "quarter": "Trimestre"
+    },
+    "showGraph": "Afficher le Graphique",
+    "hideGraph": "Masquer le Graphique",
+    "lineChart": "Graphique en Ligne",
+    "barChart": "Graphique en Barres",
+    "download": "Télécharger",
+    "downloadGraph": "Télécharger le graphique en PNG",
+    "heatmapLegend": "Légende de la Carte Thermique",
+    "heatmapExplanation": "Les couleurs des provinces indiquent la densité des réclamations. La taille du cercle représente le total des réclamations. Survolez les villes pour voir les détails."
+  }
+}

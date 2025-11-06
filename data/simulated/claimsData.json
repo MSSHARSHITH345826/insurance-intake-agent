@@ -1,0 +1,68 @@
+{
+  "claims": [],
+  "statistics": {
+    "daily": {
+      "2024-11-01": { "processed": 15, "accepted": 12, "pending": 2, "denied": 1 },
+      "2024-11-02": { "processed": 18, "accepted": 14, "pending": 3, "denied": 1 },
+      "2024-11-03": { "processed": 22, "accepted": 17, "pending": 4, "denied": 1 },
+      "2024-11-04": { "processed": 20, "accepted": 15, "pending": 4, "denied": 1 },
+      "2024-11-05": { "processed": 25, "accepted": 19, "pending": 5, "denied": 1 },
+      "2024-11-06": { "processed": 28, "accepted": 21, "pending": 5, "denied": 2 },
+      "2024-11-07": { "processed": 30, "accepted": 23, "pending": 5, "denied": 2 },
+      "2024-11-08": { "processed": 32, "accepted": 24, "pending": 6, "denied": 2 },
+      "2024-11-09": { "processed": 35, "accepted": 27, "pending": 6, "denied": 2 },
+      "2024-11-10": { "processed": 38, "accepted": 29, "pending": 7, "denied": 2 },
+      "2024-11-11": { "processed": 40, "accepted": 30, "pending": 8, "denied": 2 },
+      "2024-11-12": { "processed": 42, "accepted": 32, "pending": 8, "denied": 2 },
+      "2024-11-13": { "processed": 45, "accepted": 34, "pending": 9, "denied": 2 },
+      "2024-11-14": { "processed": 48, "accepted": 36, "pending": 9, "denied": 3 },
+      "2024-11-15": { "processed": 50, "accepted": 38, "pending": 10, "denied": 2 },
+      "2024-11-16": { "processed": 52, "accepted": 39, "pending": 11, "denied": 2 },
+      "2024-11-17": { "processed": 55, "accepted": 41, "pending": 12, "denied": 2 },
+      "2024-11-18": { "processed": 58, "accepted": 43, "pending": 13, "denied": 2 },
+      "2024-11-19": { "processed": 60, "accepted": 45, "pending": 13, "denied": 2 },
+      "2024-11-20": { "processed": 62, "accepted": 46, "pending": 14, "denied": 2 },
+      "2024-11-21": { "processed": 65, "accepted": 48, "pending": 15, "denied": 2 },
+      "2024-11-22": { "processed": 68, "accepted": 50, "pending": 16, "denied": 2 },
+      "2024-11-23": { "processed": 70, "accepted": 52, "pending": 16, "denied": 2 },
+      "2024-11-24": { "processed": 72, "accepted": 54, "pending": 17, "denied": 1 },
+      "2024-11-25": { "processed": 75, "accepted": 56, "pending": 17, "denied": 2 },
+      "2024-11-26": { "processed": 78, "accepted": 58, "pending": 18, "denied": 2 },
+      "2024-11-27": { "processed": 80, "accepted": 60, "pending": 18, "denied": 2 },
+      "2024-11-28": { "processed": 82, "accepted": 61, "pending": 19, "denied": 2 },
+      "2024-11-29": { "processed": 85, "accepted": 63, "pending": 20, "denied": 2 },
+      "2024-11-30": { "processed": 88, "accepted": 65, "pending": 21, "denied": 2 }
+    },
+    "weekly": {
+      "2024-10-28": { "processed": 95, "accepted": 70, "pending": 20, "denied": 5 },
+      "2024-11-04": { "processed": 120, "accepted": 90, "pending": 22, "denied": 8 },
+      "2024-11-11": { "processed": 145, "accepted": 110, "pending": 25, "denied": 10 },
+      "2024-11-18": { "processed": 170, "accepted": 130, "pending": 30, "denied": 10 },
+      "2024-11-25": { "processed": 195, "accepted": 150, "pending": 35, "denied": 10 }
+    },
+    "monthly": {
+      "2024-08": { "processed": 650, "accepted": 500, "pending": 120, "denied": 30 },
+      "2024-09": { "processed": 720, "accepted": 550, "pending": 140, "denied": 30 },
+      "2024-10": { "processed": 780, "accepted": 600, "pending": 150, "denied": 30 },
+      "2024-11": { "processed": 850, "accepted": 650, "pending": 170, "denied": 30 }
+    },
+    "quarterly": {
+      "2024-Q1": { "processed": 2100, "accepted": 1600, "pending": 400, "denied": 100 },
+      "2024-Q2": { "processed": 2250, "accepted": 1700, "pending": 420, "denied": 130 },
+      "2024-Q3": { "processed": 2400, "accepted": 1800, "pending": 450, "denied": 150 },
+      "2024-Q4": { "processed": 2550, "accepted": 1950, "pending": 480, "denied": 120 }
+    }
+  },
+  "cityData": {
+    "Toronto": { "total": 450, "accepted": 340, "pending": 85, "denied": 25, "lat": 43.6532, "lng": -79.3832 },
+    "Montreal": { "total": 320, "accepted": 240, "pending": 60, "denied": 20, "lat": 45.5017, "lng": -73.5673 },
+    "Vancouver": { "total": 280, "accepted": 210, "pending": 55, "denied": 15, "lat": 49.2827, "lng": -123.1207 },
+    "Calgary": { "total": 180, "accepted": 135, "pending": 35, "denied": 10, "lat": 51.0447, "lng": -114.0719 },
+    "Ottawa": { "total": 150, "accepted": 110, "pending": 30, "denied": 10, "lat": 45.4215, "lng": -75.6972 },
+    "Edmonton": { "total": 140, "accepted": 105, "pending": 28, "denied": 7, "lat": 53.5461, "lng": -113.4938 },
+    "Winnipeg": { "total": 120, "accepted": 90, "pending": 25, "denied": 5, "lat": 49.8951, "lng": -97.1384 },
+    "Quebec City": { "total": 100, "accepted": 75, "pending": 20, "denied": 5, "lat": 46.8139, "lng": -71.2080 },
+    "Hamilton": { "total": 90, "accepted": 68, "pending": 18, "denied": 4, "lat": 43.2557, "lng": -79.8711 },
+    "Kitchener": { "total": 85, "accepted": 64, "pending": 17, "denied": 4, "lat": 43.4516, "lng": -80.4925 }
+  }
+}
