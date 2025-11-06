@@ -31,6 +31,17 @@ dist-ssr
 .env.test.local
 .env.production.local
 
+# Backend Python
+backend/__pycache__/
+backend/**/__pycache__/
+backend/*.py[cod]
+backend/**/*.py[cod]
+backend/.venv/
+backend/venv/
+backend/env/
+backend/ENV/
+backend/.env
+
 # Build outputs
 build
 *.tsbuildinfo

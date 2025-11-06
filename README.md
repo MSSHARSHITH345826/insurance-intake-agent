@@ -29,9 +29,12 @@ A comprehensive digital intake portal for SunLife Insurance claims processing, b
   - Status-based filtering
   - Detailed claim information
   
-- **Chat Assistant**: Floating chat widget
+- **Chat Assistant**: AI-powered chat widget with Azure OpenAI
   - Always accessible via bottom-right floating button
-  - Ready for backend integration
+  - Real-time chat with dashboard data and statistics
+  - Markdown formatting support (tables, lists, bold, etc.)
+  - Chat history maintained (last 10 request-response pairs)
+  - Context-aware responses using dashboard data
 
 ### Design
 - **Brand Colors**:
@@ -51,6 +54,8 @@ A comprehensive digital intake portal for SunLife Insurance claims processing, b
 - **Charts**: Recharts (Line charts, Bar charts, Pie charts)
 - **Maps**: react-simple-maps with Canada provinces GeoJSON
 - **Styling**: CSS with custom design system
+- **Markdown**: react-markdown with remark-gfm for table support
+- **Backend**: FastAPI with Azure OpenAI integration
 
 ## Project Structure
 
@@ -64,6 +69,12 @@ sunlife/
 │   ├── initial_agent_sample_data_from_client/
 │   ├── pend_data/
 │   └── simulated/
+├── backend/              # FastAPI backend
+│   ├── main.py          # FastAPI application
+│   ├── requirements.txt # Python dependencies
+│   ├── services/        # Backend services
+│   │   └── chat_service.py # Azure OpenAI chat service
+│   └── .env            # Environment variables (not in git)
 ├── src/
 │   ├── components/      # Reusable React components
 │   │   ├── StatsWidget.jsx
@@ -177,15 +188,53 @@ The production build will be in the `dist` directory.
 - ✅ Enhanced translation system with fallback logic for robust language switching
 - ✅ Improved component re-rendering on language changes
 - ✅ Added direct resource bundle lookup as fallback for translations
+- ✅ Integrated FastAPI backend with Azure OpenAI for intelligent chat
+- ✅ Connected frontend chat widget to backend API
+- ✅ Added markdown rendering support for tables, lists, and formatted text
+- ✅ Implemented chat history context (last 10 request-response pairs)
+- ✅ Added dashboard data context for AI responses
+
+## Backend API
+
+The backend is a FastAPI application located in the `backend/` directory. See `backend/README.md` for detailed setup instructions.
+
+### Quick Start
+
+1. Navigate to backend directory:
+```bash
+cd backend
+```
+
+2. Create virtual environment and install dependencies:
+```bash
+python3 -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+pip install -r requirements.txt
+```
+
+3. Configure environment variables in `backend/.env`:
+```
+AZURE_OPENAI_ENDPOINT=https://your-resource-name.openai.azure.com/
+AZURE_OPENAI_KEY=your-api-key-here
+AZURE_OPENAI_MODEL=gpt-4
+AZURE_OPENAI_DEPLOYMENT=gpt-4
+```
+
+4. Run the backend server:
+```bash
+uvicorn main:app --reload --host 0.0.0.0 --port 8004
+```
+
+The API will be available at `http://localhost:8004`
 
 ## Future Enhancements
 
-- Backend integration for chat functionality
 - Real-time data updates
 - Advanced filtering and analytics
 - User management system
 - Export functionality for reports
 - Additional language support
+- Document chat functionality
 
 ## License
 

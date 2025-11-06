@@ -137,7 +137,11 @@ function Dashboard() {
         </div>
 
         {/* Floating Chat Assistant */}
-        <ChatWidget />
+        <ChatWidget 
+          claims={claims}
+          statistics={statistics}
+          cityData={cityData}
+        />
 
         <div className="table-section">
           <ClaimsTable claims={claims} />
