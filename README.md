@@ -227,6 +227,48 @@ uvicorn main:app --reload --host 0.0.0.0 --port 8004
 
 The API will be available at `http://localhost:8004`
 
+## Claims Process Simulator
+
+The application includes an interactive Claims Process Simulator that allows users to visualize and simulate the claims processing workflow. Click on any claim in the claims table to open the simulator for that claim.
+
+### Simulator Features
+- **Interactive node-based flow visualization** using React Flow
+- **Drag and drop nodes** - Click and drag nodes to rearrange the layout (when layout is unlocked)
+- **Scroll to pan** - Use mouse wheel or trackpad to scroll/pan the canvas up, down, left, and right
+- **Zoom controls** - Use the zoom controls (+/- buttons) or pinch gesture on trackpad to zoom in/out
+- **Play/Pause/Step/Reset controls** for simulation
+- **Real-time status updates** (idle, active, done) with visual feedback
+- **Branching logic** for NIGO vs IGO paths at the Content Validation gate
+- **Auto-layout functionality** to automatically arrange nodes
+- **Lock Layout toggle** to prevent accidental node movement
+- **Event log** for tracking transitions
+- **Side panel** showing current node, elapsed time, and next node information
+
+### Simulator Controls
+- **Layout Lock**: Toggle to lock/unlock node positions
+- **Auto Layout**: Automatically arrange all nodes in a grid layout
+- **Play/Pause**: Start or pause the simulation
+- **Step**: Advance one node at a time
+- **Reset**: Reset simulation to initial state
+- **Speed Slider**: Adjust simulation speed (0.25x to 3x)
+- **Branch Policy**: Select branching behavior at Content Validation (Always IGO, Always NIGO once, Random 20% NIGO)
+
+### Simulator Flow
+The simulator visualizes the claims process from Start through CHESS:
+- Start → Claim Ingestion → Claim Form Enhancement → Classification → Claim Content Validation
+- At Content Validation: Branch to NIGO (Provider Notification) or IGO (Data Enrichment)
+- Data Enrichment → Electronic Claim → Electronic Claim Validation → Gap Assessment → Code Conversion → Claim Data Entry → CHESS
+
+### Simulator Interaction
+- **Unlocked Mode**: Left-click and drag nodes to move them; middle/right-click to pan canvas
+- **Locked Mode**: Left-click and drag to pan canvas; nodes cannot be moved
+- **Scrolling**: Mouse wheel scrolls/pans the canvas
+- **Zooming**: Use zoom controls (+/-) or pinch gesture on trackpad
+- **Node States**: 
+  - Idle: Neutral dark card
+  - Active: Neon light-blue background with glow (#00E5FF)
+  - Done: Green background with glow (#22C55E)
+
 ## Future Enhancements
 
 - Real-time data updates
