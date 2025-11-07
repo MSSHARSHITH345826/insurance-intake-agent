@@ -74,7 +74,8 @@
     "heatmapExplanation": "Province colors indicate claim density. Circle size represents total claims. Hover over cities for detailed breakdown.",
     "integrationLabels": {
       "Pega": "Pega Augmentation",
-      "CHESS": "CHESS Augmentation"
+      "CHESS": "CHESS Augmentation",
+      "DataIngestion": "Data Ingestion"
     },
     "agentModal": {
       "pegaTitle": "Pega Agent Activity",

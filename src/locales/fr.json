@@ -74,7 +74,8 @@
     "heatmapExplanation": "Les couleurs des provinces indiquent la densité des réclamations. La taille du cercle représente le total des réclamations. Survolez les villes pour voir les détails.",
     "integrationLabels": {
       "Pega": "Augmentation Pega",
-      "CHESS": "Augmentation CHESS"
+      "CHESS": "Augmentation CHESS",
+      "DataIngestion": "Ingestion de Données"
     },
     "agentModal": {
       "pegaTitle": "Activité de l'Agent Pega",

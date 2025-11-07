@@ -137,6 +137,11 @@
   color: #d78b05;
 }
 
+.integration-badge.integration-datainingestion {
+  background-color: rgba(40, 167, 69, 0.12);
+  color: #1f8c3d;
+  }
+
 .status-accepted {
   background-color: rgba(40, 167, 69, 0.1);
   color: #28a745;

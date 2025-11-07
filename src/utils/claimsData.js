@@ -208,7 +208,7 @@ export const generateClaimsData = () => {
   const claims = []
   
   // Add claims from sample data (based on actual data from JSON files)
-  claims.push(generateMockClaim(sample1Data, { city: 'Toronto', status: 'accepted', date: '2024-11-15', integrationType: 'Pega' }))
+  claims.push(generateMockClaim(sample1Data, { city: 'Toronto', status: 'accepted', date: '2024-11-15', integrationType: 'DataIngestion' }))
   claims.push(generateMockClaim(sample2Data, { city: 'Toronto', status: 'pending', date: '2024-11-20', integrationType: 'Pega' }))
   claims.push(generateMockClaim(sample3Data, { city: 'Kitchener', status: 'accepted', date: '2024-11-25', integrationType: 'Pega' }))
   claims.push({
