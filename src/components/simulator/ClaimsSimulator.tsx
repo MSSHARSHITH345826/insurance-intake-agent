@@ -27,6 +27,7 @@ import ElectronicClaimValidationMessages from './ElectronicClaimValidationMessag
 import GapAssessmentMessages from './GapAssessmentMessages';
 import CodeConversionMessages from './CodeConversionMessages';
 import ClaimDataEntryMessages from './ClaimDataEntryMessages';
+import ChessStageMessages, { chessStageIds } from './ChessStageMessages';
 import ExtractionViewer from './ExtractionViewer';
 import ChatWidget from '../ChatWidget';
 import { applyLayout } from '../../utils/layoutUtils';
@@ -45,6 +46,12 @@ interface ClaimsSimulatorProps {
     claimNumber: string;
     patientName: string;
     integrationType?: string;
+    memberId?: string;
+    policyNumber?: string;
+    submittedDate?: string;
+    city?: string;
+    dentist?: string;
+    rawData?: Record<string, any>;
   };
 }
 
@@ -79,6 +86,7 @@ function ClaimsSimulatorInner({ claim }: ClaimsSimulatorProps) {
   const { fitView } = useReactFlow();
 
   const integrationFlowKey = claim?.integrationType === 'CHESS' ? 'chess' : 'default';
+  const isChessClaim = integrationFlowKey === 'chess';
 
   useEffect(() => {
     if (integrationFlowKey !== currentFlowKey) {
@@ -549,6 +557,18 @@ function ClaimsSimulatorInner({ claim }: ClaimsSimulatorProps) {
         />
       )}
 
+      {/* Chess flow stage messaging */}
+      {isChessClaim &&
+        claim &&
+        chessStageIds.map((stageId) => (
+          <ChessStageMessages
+            key={stageId}
+            stageId={stageId}
+            isActive={currentNodeId === stageId}
+            claim={claim}
+          />
+        ))}
+
       {/* Extraction Viewer */}
       {claim && (
         <ExtractionViewer
@@ -593,7 +613,7 @@ function ClaimsSimulatorInner({ claim }: ClaimsSimulatorProps) {
   );
 }
 
-export default function ClaimsSimulator({ claim }: { claim?: { claimNumber: string; patientName: string } }) {
+export default function ClaimsSimulator({ claim }: ClaimsSimulatorProps) {
   return (
     <ReactFlowProvider>
       <ClaimsSimulatorInner claim={claim} />

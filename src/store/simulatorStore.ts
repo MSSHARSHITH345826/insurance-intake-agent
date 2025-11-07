@@ -71,6 +71,10 @@ interface SimulatorState {
   claimDataEntryMessages: string[];
   currentClaimDataEntryMessageIndex: number;
 
+  // Chess flow messaging
+  chessStageMessages: Record<string, string[]>;
+  chessStageMessageIndex: Record<string, number>;
+
   // Actions
   setNodes: (nodes: FlowNode[]) => void;
   setEdges: (edges: FlowEdge[]) => void;
@@ -108,6 +112,9 @@ interface SimulatorState {
   setShowCodeConversionPopup: (show: boolean) => void;
   setClaimDataEntryMessages: (messages: string[]) => void;
   setCurrentClaimDataEntryMessageIndex: (index: number) => void;
+  setChessStageMessages: (stageId: string, messages: string[]) => void;
+  setChessStageMessageIndex: (stageId: string, index: number) => void;
+  resetChessStageMessaging: () => void;
   loadFlow: (flowKey: FlowKey) => void;
 }
 
@@ -189,6 +196,8 @@ export const useSimulatorStore = create<SimulatorState>((set, get) => ({
   showCodeConversionPopup: false,
   claimDataEntryMessages: [],
   currentClaimDataEntryMessageIndex: -1,
+  chessStageMessages: {},
+  chessStageMessageIndex: {},
 
   // Actions
   setNodes: (nodes) => {
@@ -284,6 +293,22 @@ export const useSimulatorStore = create<SimulatorState>((set, get) => ({
   setClaimDataEntryMessages: (messages) => set({ claimDataEntryMessages: messages }),
 
   setCurrentClaimDataEntryMessageIndex: (index) => set({ currentClaimDataEntryMessageIndex: index }),
+  
+  setChessStageMessages: (stageId, messages) =>
+    set((state) => ({
+      chessStageMessages: { ...state.chessStageMessages, [stageId]: messages }
+    })),
+
+  setChessStageMessageIndex: (stageId, index) =>
+    set((state) => ({
+      chessStageMessageIndex: { ...state.chessStageMessageIndex, [stageId]: index }
+    })),
+
+  resetChessStageMessaging: () =>
+    set({
+      chessStageMessages: {},
+      chessStageMessageIndex: {}
+    }),
 
   reset: () => {
     const { currentFlowKey } = get();
@@ -318,7 +343,9 @@ export const useSimulatorStore = create<SimulatorState>((set, get) => ({
       currentCodeConversionMessageIndex: -1,
       showCodeConversionPopup: false,
       claimDataEntryMessages: [],
-      currentClaimDataEntryMessageIndex: -1
+      currentClaimDataEntryMessageIndex: -1,
+      chessStageMessages: {},
+      chessStageMessageIndex: {}
     });
   },
   
@@ -355,7 +382,9 @@ export const useSimulatorStore = create<SimulatorState>((set, get) => ({
       currentCodeConversionMessageIndex: -1,
       showCodeConversionPopup: false,
       claimDataEntryMessages: [],
-      currentClaimDataEntryMessageIndex: -1
+      currentClaimDataEntryMessageIndex: -1,
+      chessStageMessages: {},
+      chessStageMessageIndex: {}
     });
   }
 }));
