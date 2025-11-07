@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next'
 import { LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts'
 import './StatsWidget.css'
 
-function StatsWidget({ title, value, valueByPeriod, icon, color = 'default', dataKey, timeSeriesData, timePeriod }) {
+function StatsWidget({ title, value, valueByPeriod, icon, color = 'default', dataKey, timeSeriesData, timePeriod, onWidgetClick }) {
   const { t } = useTranslation()
   const [selectedPeriod, setSelectedPeriod] = useState(timePeriod || 'day')
   const [showGraph, setShowGraph] = useState(true) // Show graphs by default
@@ -238,8 +238,30 @@ function StatsWidget({ title, value, valueByPeriod, icon, color = 'default', dat
     img.src = url
   }
 
+  const handleWidgetClick = (event) => {
+    if (onWidgetClick) {
+      onWidgetClick(event, selectedPeriod)
+    }
+  }
+
+  const stopPropagation = (event) => {
+    event.stopPropagation()
+  }
+
   return (
-    <div className={`stats-widget stats-widget-${color}`}>
+    <div
+      className={`stats-widget stats-widget-${color} ${onWidgetClick ? 'stats-widget-clickable' : ''}`}
+      onClick={handleWidgetClick}
+      role={onWidgetClick ? 'button' : undefined}
+      tabIndex={onWidgetClick ? 0 : undefined}
+      onKeyDown={(event) => {
+        if (!onWidgetClick) return
+        if (event.key === 'Enter' || event.key === ' ') {
+          event.preventDefault()
+          onWidgetClick(event, selectedPeriod)
+        }
+      }}
+    >
       <div className="stats-widget-header">
         <div className="stats-header-left">
           <span className="stats-icon">{icon}</span>
@@ -250,7 +272,7 @@ function StatsWidget({ title, value, valueByPeriod, icon, color = 'default', dat
             value={selectedPeriod}
             onChange={(e) => setSelectedPeriod(e.target.value)}
             className="period-selector"
-            onClick={(e) => e.stopPropagation()}
+            onClick={stopPropagation}
           >
             <option value="day">{t('dashboard.timePeriods.day')}</option>
             <option value="week">{t('dashboard.timePeriods.week')}</option>
@@ -277,14 +299,20 @@ function StatsWidget({ title, value, valueByPeriod, icon, color = 'default', dat
                 <div className="chart-type-selector">
                   <button
                     className={`chart-type-btn ${chartType === 'line' ? 'active' : ''}`}
-                    onClick={() => setChartType('line')}
+                      onClick={(e) => {
+                        e.stopPropagation()
+                        setChartType('line')
+                      }}
                     title={t('dashboard.lineChart')}
                   >
                     📈
                   </button>
                   <button
                     className={`chart-type-btn ${chartType === 'bar' ? 'active' : ''}`}
-                    onClick={() => setChartType('bar')}
+                      onClick={(e) => {
+                        e.stopPropagation()
+                        setChartType('bar')
+                      }}
                     title={t('dashboard.barChart')}
                   >
                     📊
@@ -292,7 +320,10 @@ function StatsWidget({ title, value, valueByPeriod, icon, color = 'default', dat
                 </div>
                 <button
                   className="download-btn"
-                  onClick={handleDownloadPNG}
+                    onClick={(e) => {
+                      e.stopPropagation()
+                      handleDownloadPNG()
+                    }}
                   title={t('dashboard.downloadGraph')}
                 >
                   ⬇️ {t('dashboard.download')}

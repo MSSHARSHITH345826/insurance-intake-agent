@@ -1,0 +1,116 @@
+.agent-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(5, 8, 12, 0.72);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 12000;
+  padding: 24px;
+}
+
+.agent-modal {
+  position: relative;
+  background: #0f1724;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  padding: 32px;
+  color: #e6eaf2;
+  width: min(520px, 90vw);
+  box-shadow: 0 24px 48px rgba(0, 0, 0, 0.35);
+}
+
+.agent-modal h2 {
+  margin: 0 0 16px;
+  font-size: 24px;
+  font-weight: 600;
+  color: #00e5ff;
+  text-align: center;
+}
+
+.agent-modal-close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  background: transparent;
+  border: none;
+  font-size: 20px;
+  color: rgba(230, 234, 242, 0.75);
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.agent-modal-close:hover,
+.agent-modal-close:focus {
+  color: #00e5ff;
+  outline: none;
+}
+
+.agent-modal-steps {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.agent-modal-steps li {
+  padding: 12px 16px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid transparent;
+  font-size: 14px;
+  line-height: 1.4;
+  transition: all 0.3s ease;
+}
+
+.agent-step-hidden {
+  opacity: 0.3;
+  border-color: rgba(255, 255, 255, 0.04);
+}
+
+.agent-step-visible {
+  opacity: 1;
+  border-color: rgba(0, 229, 255, 0.4);
+  background: rgba(0, 229, 255, 0.06);
+}
+
+.agent-modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+.agent-modal-btn {
+  min-width: 96px;
+  padding: 10px 18px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: transparent;
+  color: #e6eaf2;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.agent-modal-btn:hover,
+.agent-modal-btn:focus {
+  border-color: #00e5ff;
+  color: #00e5ff;
+  outline: none;
+}
+
+.agent-modal-btn.primary {
+  background: #00e5ff;
+  color: #052029;
+  border-color: #00e5ff;
+}
+
+.agent-modal-btn.primary:hover,
+.agent-modal-btn.primary:focus {
+  background: #12f0ff;
+  border-color: #12f0ff;
+}
+

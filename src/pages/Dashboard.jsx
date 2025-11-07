@@ -7,6 +7,7 @@ import { loadSimulatedData, getTimeSeriesData, getSimulatedCityData } from '../u
 import StatsWidget from '../components/StatsWidget'
 import CityMapWidget from '../components/CityMapWidget'
 import ClaimsTable from '../components/ClaimsTable'
+import AgentStatusModal from '../components/AgentStatusModal'
 import logo from '@assets/small_logo.png'
 import './Dashboard.css'
 
@@ -18,6 +19,7 @@ function Dashboard() {
   const [cityData, setCityData] = useState([])
   const [timeSeriesData, setTimeSeriesData] = useState(null)
   const [loading, setLoading] = useState(true)
+  const [activeAgentModal, setActiveAgentModal] = useState(null)
 
   useEffect(() => {
     // Load claims data
@@ -103,6 +105,7 @@ function Dashboard() {
             dataKey="pega"
             timeSeriesData={timeSeriesData}
             timePeriod="day"
+            onWidgetClick={() => setActiveAgentModal('pega')}
           />
           <StatsWidget
             title={t('dashboard.chessAgent')}
@@ -117,6 +120,7 @@ function Dashboard() {
             dataKey="chess"
             timeSeriesData={timeSeriesData}
             timePeriod="day"
+            onWidgetClick={() => setActiveAgentModal('chess')}
           />
           <StatsWidget
             title={t('dashboard.acceptedClaims')}
@@ -157,6 +161,13 @@ function Dashboard() {
           <ClaimsTable claims={claims} />
         </div>
       </main>
+
+      {activeAgentModal && (
+        <AgentStatusModal
+          type={activeAgentModal}
+          onClose={() => setActiveAgentModal(null)}
+        />
+      )}
     </div>
   )
 }

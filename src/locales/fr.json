@@ -70,6 +70,24 @@
     "download": "Télécharger",
     "downloadGraph": "Télécharger le graphique en PNG",
     "heatmapLegend": "Légende de la Carte Thermique",
-    "heatmapExplanation": "Les couleurs des provinces indiquent la densité des réclamations. La taille du cercle représente le total des réclamations. Survolez les villes pour voir les détails."
+    "heatmapExplanation": "Les couleurs des provinces indiquent la densité des réclamations. La taille du cercle représente le total des réclamations. Survolez les villes pour voir les détails.",
+    "agentModal": {
+      "pegaTitle": "Activité de l'Agent Pega",
+      "chessTitle": "Statut de l'Agent CHESS",
+      "pegaSteps": [
+        "Connexion à l'agent Pega...",
+        "Connexion établie ✅",
+        "4 nouveaux dossiers identifiés",
+        "Récupération des données...",
+        "Dossiers placés dans la file des contrôles qualité"
+      ],
+      "chessSteps": [
+        "Connexion à CHESS...",
+        "Connexion établie ✅",
+        "Données à jour"
+      ],
+      "ok": "OK",
+      "close": "Fermer"
+    }
   }
 }

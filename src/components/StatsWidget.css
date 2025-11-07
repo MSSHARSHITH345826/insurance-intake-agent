@@ -13,6 +13,15 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
+.stats-widget.stats-widget-clickable {
+  cursor: pointer;
+}
+
+.stats-widget.stats-widget-clickable:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.18);
+}
+
 .stats-widget-header {
   display: flex;
   justify-content: space-between;

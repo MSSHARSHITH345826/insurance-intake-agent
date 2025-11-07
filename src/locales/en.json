@@ -70,6 +70,24 @@
     "download": "Download",
     "downloadGraph": "Download graph as PNG",
     "heatmapLegend": "Heatmap Legend",
-    "heatmapExplanation": "Province colors indicate claim density. Circle size represents total claims. Hover over cities for detailed breakdown."
+    "heatmapExplanation": "Province colors indicate claim density. Circle size represents total claims. Hover over cities for detailed breakdown.",
+    "agentModal": {
+      "pegaTitle": "Pega Agent Activity",
+      "chessTitle": "CHESS Agent Status",
+      "pegaSteps": [
+        "Connecting to Pega Agent...",
+        "Connection established ✅",
+        "4 new cases identified",
+        "Pulling case data...",
+        "Cases placed into quality checks queue"
+      ],
+      "chessSteps": [
+        "Connecting to CHESS...",
+        "Connection established ✅",
+        "Data is up to date"
+      ],
+      "ok": "OK",
+      "close": "Close"
+    }
   }
 }
