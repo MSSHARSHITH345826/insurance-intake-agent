@@ -6,7 +6,8 @@ const STEP_DELAY = 1200
 
 function AgentStatusModal({ type, onClose }) {
   const { t } = useTranslation()
-  const [visibleStep, setVisibleStep] = useState(0)
+  const [currentStep, setCurrentStep] = useState(0)
+  const [isLooping, setIsLooping] = useState(false)
 
   const steps = useMemo(() => {
     const key = type === 'pega' ? 'pegaSteps' : 'chessSteps'
@@ -37,13 +38,31 @@ function AgentStatusModal({ type, onClose }) {
     : t('dashboard.agentModal.chessTitle', 'CHESS Agent Status')
 
   useEffect(() => {
-    setVisibleStep(0)
+    setCurrentStep(0)
+    setIsLooping(false)
     const timers = []
     for (let i = 1; i < steps.length; i += 1) {
-      timers.push(setTimeout(() => setVisibleStep(i), STEP_DELAY * i))
+      timers.push(setTimeout(() => setCurrentStep(i), STEP_DELAY * i))
     }
+    timers.push(
+      setTimeout(() => {
+        setIsLooping(true)
+        let index = 0
+        const loopTimer = setInterval(() => {
+          index = (index + 1) % steps.length
+          setCurrentStep(index)
+        }, STEP_DELAY)
+        timers.push({ loopTimer, isInterval: true })
+      }, STEP_DELAY * steps.length)
+    )
     return () => {
-      timers.forEach(clearTimeout)
+      timers.forEach((timer) => {
+        if (typeof timer === 'number') {
+          clearTimeout(timer)
+        } else if (timer?.isInterval) {
+          clearInterval(timer.loopTimer)
+        }
+      })
     }
   }, [steps])
 
@@ -58,16 +77,11 @@ function AgentStatusModal({ type, onClose }) {
           ✕
         </button>
         <h2>{title}</h2>
-        <ul className="agent-modal-steps">
-          {steps.map((step, index) => (
-            <li
-              key={index}
-              className={index <= visibleStep ? 'agent-step-visible' : 'agent-step-hidden'}
-            >
-              {step}
-            </li>
-          ))}
-        </ul>
+        <div className="agent-modal-step-container">
+          <div key={currentStep} className={`agent-step-card ${isLooping ? 'agent-step-loop' : ''}`}>
+            {steps[currentStep]}
+          </div>
+        </div>
         <div className="agent-modal-actions">
           <button onClick={onClose} className="agent-modal-btn primary">
             {t('dashboard.agentModal.ok', 'OK')}

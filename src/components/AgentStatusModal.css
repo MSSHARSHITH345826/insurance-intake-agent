@@ -46,34 +46,39 @@
   outline: none;
 }
 
-.agent-modal-steps {
-  list-style: none;
-  padding: 0;
-  margin: 0 0 24px;
+.agent-modal-step-container {
+  min-height: 120px;
+  margin-bottom: 24px;
   display: flex;
-  flex-direction: column;
-  gap: 12px;
+  align-items: center;
+  justify-content: center;
 }
 
-.agent-modal-steps li {
-  padding: 12px 16px;
-  border-radius: 10px;
+.agent-step-card {
+  width: 100%;
+  padding: 18px 20px;
+  border-radius: 12px;
   background: rgba(255, 255, 255, 0.04);
-  border: 1px solid transparent;
-  font-size: 14px;
-  line-height: 1.4;
-  transition: all 0.3s ease;
+  border: 1px solid rgba(0, 229, 255, 0.3);
+  font-size: 15px;
+  line-height: 1.5;
+  text-align: center;
+  animation: fadeInScale 0.4s ease;
 }
 
-.agent-step-hidden {
-  opacity: 0.3;
-  border-color: rgba(255, 255, 255, 0.04);
+.agent-step-loop {
+  animation: fadeInScale 0.4s ease;
 }
 
-.agent-step-visible {
-  opacity: 1;
-  border-color: rgba(0, 229, 255, 0.4);
-  background: rgba(0, 229, 255, 0.06);
+@keyframes fadeInScale {
+  from {
+    transform: scale(0.96);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
 
 .agent-modal-actions {
