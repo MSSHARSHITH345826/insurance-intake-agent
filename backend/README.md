@@ -195,6 +195,9 @@ The services use the following environment variables in `backend/.env`:
 - `PDF_INGESTION_MAX_PAGES`: Optional cap on the number of PDF pages rendered into images for the multimodal prompt (default: 3)
 - `PDF_INGESTION_RENDER_SCALE`: Scaling factor when rasterizing PDF pages (default: 2.0)
 - `PDF_INGESTION_INCLUDE_TEXT`: Set to `false` to skip sending OCR text and provide only page images to the LLM (default: true)
+- `PDF_INGESTION_USE_MISTRAL`: Set to `true` to run Azure Mistral Document AI OCR and use its textual output (default: false)
+- `MISTRAL_OCR_ENDPOINT`: Override endpoint for the Mistral OCR service (default: `https://mirakalous-ai-rnd.services.ai.azure.com/providers/mistral/azure/ocr`)
+- `MISTRAL_KEY`: API key used to authenticate with the Mistral OCR service when OCR is enabled
 
 **Note**: The service requires Azure OpenAI to be configured. If not configured, it will return clear error messages instead of fallback responses.
 

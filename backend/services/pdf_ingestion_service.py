@@ -34,6 +34,14 @@ class PDFIngestionService:
         self.include_text = (
             os.getenv("PDF_INGESTION_INCLUDE_TEXT", "true").strip().lower() != "false"
         )
+        self.use_mistral_ocr = (
+            os.getenv("PDF_INGESTION_USE_MISTRAL", "false").strip().lower() == "true"
+        )
+        self.mistral_endpoint = os.getenv(
+            "MISTRAL_OCR_ENDPOINT",
+            "https://mirakalous-ai-rnd.services.ai.azure.com/providers/mistral/azure/ocr",
+        )
+        self.mistral_key = os.getenv("MISTRAL_KEY")
 
         self.configured = bool(
             self.openai_endpoint and self.openai_key and self.openai_deployment
@@ -58,6 +66,20 @@ class PDFIngestionService:
             )
 
         text, metadata = self._extract_pdf_text(pdf_bytes)
+        metadata["text_source"] = "pypdf"
+
+        if (
+            self.include_text
+            and self.use_mistral_ocr
+            and self.mistral_endpoint
+            and self.mistral_key
+        ):
+            mistral_text = self._call_mistral_document_ai(pdf_bytes)
+            if mistral_text:
+                text = mistral_text
+                metadata["text_source"] = "mistral_document_ai"
+            else:
+                metadata["ocr_warning"] = "Mistral OCR failed; falling back to PyPDF text."
         page_images, image_info = self._render_pdf_images(pdf_bytes)
         metadata.update(image_info)
         if self.include_text and not text.strip():
@@ -160,6 +182,74 @@ class PDFIngestionService:
             logger.warning("Failed to render PDF pages for vision prompt: %s", exc)
 
         return images, image_info
+
+    def _call_mistral_document_ai(self, pdf_bytes: bytes) -> Optional[str]:
+        """
+        Use Azure-hosted Mistral Document AI to perform OCR on the PDF.
+        """
+        try:
+            pdf_base64 = base64.b64encode(pdf_bytes).decode("utf-8")
+            payload = {
+                "model": "mistral-document-ai-2505",
+                "document": {
+                    "type": "document_url",
+                    "document_url": f"data:application/pdf;base64,{pdf_base64}",
+                },
+                "include_image_base64": False,
+            }
+
+            headers = {
+                "Content-Type": "application/json",
+                "Authorization": f"Bearer {self.mistral_key}",
+            }
+
+            response = requests.post(
+                self.mistral_endpoint,
+                headers=headers,
+                json=payload,
+                timeout=120,
+            )
+
+            if response.status_code != 200:
+                logger.warning(
+                    "Mistral OCR error: %s - %s", response.status_code, response.text
+                )
+                return None
+
+            result = response.json()
+            text_fragments: List[str] = []
+
+            if isinstance(result, dict):
+                output = result.get("output")
+                if isinstance(output, dict):
+                    primary_text = output.get("text") or output.get("markdown")
+                    if isinstance(primary_text, str):
+                        text_fragments.append(primary_text)
+
+                    pages_output = output.get("pages")
+                    if isinstance(pages_output, list):
+                        for page in pages_output:
+                            if isinstance(page, dict):
+                                page_text = page.get("text") or page.get("markdown")
+                                if isinstance(page_text, str):
+                                    text_fragments.append(page_text)
+
+                pages = result.get("pages")
+                if isinstance(pages, list):
+                    for page in pages:
+                        if isinstance(page, dict):
+                            page_text = page.get("text") or page.get("markdown")
+                            if isinstance(page_text, str):
+                                text_fragments.append(page_text)
+
+            combined = "\n\n".join(
+                fragment.strip() for fragment in text_fragments if isinstance(fragment, str)
+            )
+            return combined.strip() or None
+
+        except Exception as exc:  # pragma: no cover - defensive
+            logger.warning("Failed to call Mistral Document AI: %s", exc)
+        return None
 
     def _load_reference_examples(self, paths: List[Path]) -> List[Dict[str, Any]]:
         examples: List[Dict[str, Any]] = []
