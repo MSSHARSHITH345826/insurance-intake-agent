@@ -1,0 +1,167 @@
+{
+    "document": {
+      "title": "Dental Claim Form",
+      "issuer": "Sun Life Assurance Company of Canada",
+      "canadian_dental_association_approved": true,
+      "form_code": "DENT-E-03-21",
+      "page_count": 2,
+      "source_file": "2025_11_03_03.pdf",
+      "_citation": ":contentReference[oaicite:0]{index=0}"
+    },
+    "section_1_to_be_completed_by_dentist": {
+      "patient": {
+        "last_name": "ANDERSON",
+        "given_name": "DAVID",
+        "unique_number": "L263371",
+        "spec": null,
+        "patient_office_account_number": null,
+        "address": {
+          "street": "102 CHURCH STREET",
+          "apartment_or_suite": "R6",
+          "city": "KITCHENER",
+          "province": "ON",
+          "postal_code": "N5N F6E3E",
+          "confidence": "high"
+        },
+        "phone": "515-843-5016"
+      },
+      "assignment_of_benefits_authorized": true,
+      "authorize_payment_directly_to_dentist": true,
+      "signatures": {
+        "patient_or_guardian_signature_name": "David Anderson",
+        "office_verification_or_claimant_signature_name": "Dr. Anne",
+        "confidence": "high"
+      },
+      "services": {
+        "line_items": [
+          {
+            "date_of_service": "2024-11-21",
+            "procedure_code": "02301",
+            "tooth_code": null,
+            "tooth_surfaces": null,
+            "dentist_fee_amount": 50.00,
+            "laboratory_charge_amount": null,
+            "total_charge_amount": 50.00
+          },
+          {
+            "date_of_service": "2024-11-29",
+            "procedure_code": "02304",
+            "tooth_code": null,
+            "tooth_surfaces": null,
+            "dentist_fee_amount": 90.00,
+            "laboratory_charge_amount": null,
+            "total_charge_amount": 90.00
+          }
+        ],
+        "currency": "CAD",
+        "total_fee_submitted": 120.00
+      }
+    },
+    "section_2_information_about_you": {
+      "contract_number": "160101",
+      "member_id_number": "TS22000004",
+      "plan_sponsor_or_employer": "CDSP",
+      "preferred_language_of_correspondence": "English",
+      "member": {
+        "last_name": "LALAM",
+        "first_name": "NOAM",
+        "date_of_birth": "1985-02-02",
+        "daytime_phone_number": "515-843-5016",
+        "address": {
+          "street": "102 CHURCH ST",
+          "apartment_or_suite": "R6",
+          "city": "KITCHENER",
+          "province": "ON",
+          "postal_code": "F6E3E"
+        }
+      }
+    },
+    "section_3_spouse_and_children": {
+      "applies": false,
+      "entries": []
+    },
+    "section_4_co_ordination_of_benefits": {
+      "spouse_or_children_covered_under_other_dental_plan": "No",
+      "spouse_plan_with_sun_life": null,
+      "co_ordinate_benefits_requested": null,
+      "spouse_contract_number": null,
+      "spouse_member_id_number": null,
+      "spouse_date_of_birth": null,
+      "spouse_signature_on_file": null,
+      "spouse_signature_date": null
+    },
+    "section_5_details_of_claim": {
+      "expenses_result_of_accident": "No",
+      "accident_details": {
+        "date": null,
+        "location": null,
+        "how": null
+      },
+      "expenses_result_of_workers_compensation_condition": "No",
+      "orthodontic_treatment": "No",
+      "implants": "No",
+      "crowns_bridges_dentures": {
+        "initial_placement": null,
+        "date_teeth_extracted": null,
+        "prior_placement_date": null,
+        "reason_for_replacement": null
+      },
+      "supporting_materials_requested": [
+        "Pre-treatment x-rays (for crowns, bridges, veneers, inlays, onlays)",
+        "List of all missing teeth (for bridges only)"
+      ]
+    },
+    "section_6_authorization_and_signature": {
+      "member_signature_name": "Noam Lalam",
+      "member_signature_date": "2024-12-04",
+      "authorizations_summary": [
+        "Certifies goods/services were received and information is true/complete",
+        "Authorizes collection, use, and disclosure of information for underwriting, administration, and claims adjudication",
+        "Acknowledges possible fraud investigation and overpayment recovery",
+        "Confirms photocopy/electronic authorization validity for plan administration"
+      ]
+    },
+    "section_7_respecting_your_privacy_summary": {
+      "purpose": "Help clients achieve lifetime financial security and live healthier lives",
+      "uses_of_personal_information": [
+        "Develop and deliver products and services",
+        "Manage business operations",
+        "Underwriting, administration, and claims adjudication",
+        "Protect against fraud, errors, or misrepresentations",
+        "Inform about other products/services",
+        "Meet legal and security obligations"
+      ],
+      "contact": {
+        "website": "sunlife.ca/privacy",
+        "phone_hours_et": "Mon–Fri, 8am–8pm ET",
+        "toll_free": "1-800-361-6212"
+      }
+    },
+    "mailing_instructions_and_addresses": [
+      {
+        "office": "Sun Life Assurance Company of Canada",
+        "po_box": "PO Box 11658 Stn CV",
+        "city_province_postal": "Montreal QC H3C 6C1"
+      },
+      {
+        "office": "Sun Life Assurance Company of Canada",
+        "po_box": "PO Box 2010 Stn Waterloo",
+        "city_province_postal": "Waterloo ON N2J 0A6"
+      }
+    ],
+    "provenance": {
+      "page_1": [
+        "Patient and dentist details with two procedure line items totaling $120 CAD",
+        "Member demographic section with address and employer info"
+      ],
+      "page_2": [
+        "Standard Sun Life authorization and privacy statement identical in structure to other claim forms"
+      ]
+    },
+    "extraction_quality_notes": [
+      "All printed fields fully legible; handwriting fields cross-verified from scan.",
+      "Minor uncertainty in postal code (likely F6E3E or F6E3EC).",
+      "Currency confirmed as CAD; date normalization to YYYY-MM-DD."
+    ]
+  }
+  

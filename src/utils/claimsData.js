@@ -84,6 +84,21 @@ const sample3Data = {
   }
 }
 
+const extractionAssets = {
+  ameliaJohnson: {
+    pdfPath: '/data/initial_agent_sample_data_from_client/2025_11_03_01.pdf',
+    jsonPath: '/data/initial_agent_sample_data_from_client/extracted_data/2025_11_03_01.json',
+  },
+  saraSmith: {
+    pdfPath: '/data/initial_agent_sample_data_from_client/2025_11_03_02.pdf',
+    jsonPath: '/data/initial_agent_sample_data_from_client/extracted_data/2025_11_03_02.json',
+  },
+  davidAnderson: {
+    pdfPath: '/data/initial_agent_sample_data_from_client/2025_11_03_03.pdf',
+    jsonPath: '/data/initial_agent_sample_data_from_client/extracted_data/2025_11_03_03.json',
+  },
+};
+
 const externalScenario1Claim = {
   ClaimantInformation: {
     ClaimantName: 'Robin Noah',
@@ -199,7 +214,8 @@ const generateMockClaim = (baseData, variations) => {
     dentist: baseData.section_1_to_be_completed_by_dentist?.signatures?.office_verification_or_claimant_signature_name || 'N/A',
     procedureCount: baseData.section_1_to_be_completed_by_dentist?.services?.line_items?.length || 0,
     integrationType: variations.integrationType || 'Pega',
-    rawData: baseData
+    rawData: baseData,
+    extractionAssets: variations.extractionAssets || null,
   }
 }
 
@@ -208,9 +224,9 @@ export const generateClaimsData = () => {
   const claims = []
   
   // Add claims from sample data (based on actual data from JSON files)
-  claims.push(generateMockClaim(sample1Data, { city: 'Toronto', status: 'accepted', date: '2024-11-15', integrationType: 'DataIngestion' }))
-  claims.push(generateMockClaim(sample2Data, { city: 'Toronto', status: 'pending', date: '2024-11-20', integrationType: 'DataIngestion' }))
-  claims.push(generateMockClaim(sample3Data, { city: 'Kitchener', status: 'accepted', date: '2024-11-25', integrationType: 'DataIngestion' }))
+  claims.push(generateMockClaim(sample1Data, { city: 'Toronto', status: 'accepted', date: '2024-11-15', integrationType: 'DataIngestion', extractionAssets: extractionAssets.ameliaJohnson }))
+  claims.push(generateMockClaim(sample2Data, { city: 'Toronto', status: 'pending', date: '2024-11-20', integrationType: 'DataIngestion', extractionAssets: extractionAssets.saraSmith }))
+  claims.push(generateMockClaim(sample3Data, { city: 'Kitchener', status: 'accepted', date: '2024-11-25', integrationType: 'DataIngestion', extractionAssets: extractionAssets.davidAnderson }))
   claims.push({
     id: 'CLM-ROBIN-NOAH-20251107',
     claimNumber: 'SLF-129835',

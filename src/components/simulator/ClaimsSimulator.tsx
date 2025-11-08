@@ -52,6 +52,11 @@ interface ClaimsSimulatorProps {
     city?: string;
     dentist?: string;
     rawData?: Record<string, any>;
+    extractionAssets?: {
+      pdfPath?: string;
+      jsonPath?: string;
+      title?: string;
+    } | null;
   };
 }
 
@@ -576,6 +581,7 @@ function ClaimsSimulatorInner({ claim }: ClaimsSimulatorProps) {
           onClose={() => setShowExtractionViewer(false)}
           claimNumber={claim.claimNumber}
           patientName={claim.patientName}
+          documentConfig={claim.extractionAssets || null}
         />
       )}
 

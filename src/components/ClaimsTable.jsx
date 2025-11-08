@@ -4,6 +4,7 @@ import './ClaimsTable.css'
 
 // Lazy load simulator to prevent blocking app load
 const ClaimsSimulator = lazy(() => import('./simulator/ClaimsSimulator'))
+import ExtractionViewer from './simulator/ExtractionViewer'
 
 // Error Boundary for simulator
 class ErrorBoundary extends Component {
@@ -92,16 +93,17 @@ function ClaimsTable({ claims }) {
   const [filterStatus, setFilterStatus] = useState('all')
   const [language, setLanguage] = useState(i18n.language)
   const [selectedClaim, setSelectedClaim] = useState(null)
+  const [selectedExtractionClaim, setSelectedExtractionClaim] = useState(null)
   
   // Prevent body scroll when modal is open
   useEffect(() => {
-    if (selectedClaim) {
+    if (selectedClaim || selectedExtractionClaim) {
       document.body.classList.add('modal-open')
       return () => {
         document.body.classList.remove('modal-open')
       }
     }
-  }, [selectedClaim])
+  }, [selectedClaim, selectedExtractionClaim])
   
   // Listen to language changes to force re-render
   useEffect(() => {
@@ -255,6 +257,9 @@ function ClaimsTable({ claims }) {
                 {t('dashboard.submittedDate')}
                 {sortField === 'submittedDate' && (sortDirection === 'asc' ? ' ↑' : ' ↓')}
               </th>
+              <th className="extraction-column">
+                {t('dashboard.extractionAgent')}
+              </th>
             </tr>
           </thead>
           <tbody>
@@ -310,6 +315,21 @@ function ClaimsTable({ claims }) {
                     <td>{renderIntegrationBadge(claim.integrationType)}</td>
                     <td>${claim.amount.toLocaleString()} {claim.currency}</td>
                     <td>{new Date(claim.submittedDate).toLocaleDateString()}</td>
+                    <td onClick={(e) => e.stopPropagation()}>
+                      {claim.extractionAssets ? (
+                        <button
+                          type="button"
+                          className="extraction-link"
+                          onClick={() => setSelectedExtractionClaim(claim)}
+                        >
+                          {t('dashboard.viewExtraction')}
+                        </button>
+                      ) : (
+                        <span className="extraction-unavailable">
+                          {t('dashboard.extractionUnavailable')}
+                        </span>
+                      )}
+                    </td>
                   </tr>
                 )
               })
@@ -389,6 +409,16 @@ function ClaimsTable({ claims }) {
             </div>
           </div>
         </div>
+      )}
+
+      {selectedExtractionClaim && (
+        <ExtractionViewer
+          isOpen={Boolean(selectedExtractionClaim)}
+          onClose={() => setSelectedExtractionClaim(null)}
+          claimNumber={selectedExtractionClaim.claimNumber}
+          patientName={selectedExtractionClaim.patientName}
+          documentConfig={selectedExtractionClaim.extractionAssets}
+        />
       )}
     </div>
   )

@@ -103,6 +103,44 @@
   color: #003946;
 }
 
+.extraction-column {
+  cursor: default;
+}
+
+.extraction-link {
+  padding: 6px 12px;
+  border-radius: 8px;
+  border: none;
+  background: linear-gradient(135deg, #003b5c, #005f7a);
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.extraction-link:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(0, 63, 88, 0.2);
+  background: linear-gradient(135deg, #005f7a, #0089a8);
+}
+
+.extraction-link:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(0, 137, 168, 0.25);
+}
+
+.extraction-unavailable {
+  font-size: 12px;
+  color: rgba(0, 57, 70, 0.5);
+  font-style: italic;
+}
+
 .claims-table tbody tr:hover {
   background-color: #f8f9fa;
 }

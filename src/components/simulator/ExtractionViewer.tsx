@@ -1,49 +1,83 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import './ExtractionViewer.css';
+
+interface DocumentConfig {
+  pdfPath?: string;
+  jsonPath?: string;
+  title?: string;
+}
 
 interface ExtractionViewerProps {
   isOpen: boolean;
   onClose: () => void;
   claimNumber: string;
   patientName: string;
+  documentConfig?: DocumentConfig | null;
 }
 
-function ExtractionViewer({ isOpen, onClose, claimNumber, patientName }: ExtractionViewerProps) {
+const defaultDocumentLibrary: Record<string, DocumentConfig> = {
+  'SLF DEN 9997310': {
+    pdfPath: '/data/initial_agent_sample_data_from_client/2025_11_03_01.pdf',
+    jsonPath: '/data/initial_agent_sample_data_from_client/extracted_data/2025_11_03_01.json',
+  },
+  'SLF-81612': {
+    pdfPath: '/data/initial_agent_sample_data_from_client/2025_11_03_02.pdf',
+    jsonPath: '/data/initial_agent_sample_data_from_client/extracted_data/2025_11_03_02.json',
+  },
+  'SLF-L263371': {
+    pdfPath: '/data/initial_agent_sample_data_from_client/2025_11_03_03.pdf',
+    jsonPath: '/data/initial_agent_sample_data_from_client/extracted_data/2025_11_03_03.json',
+  },
+};
+
+function ExtractionViewer({ isOpen, onClose, claimNumber, patientName, documentConfig = null }: ExtractionViewerProps) {
   const [pdfUrl, setPdfUrl] = useState<string | null>(null);
   const [extractedData, setExtractedData] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [activeTab, setActiveTab] = useState<'raw' | 'tabular'>('raw');
 
+  const candidateConfigs = useMemo(() => {
+    const configs: DocumentConfig[] = [];
+    if (documentConfig) {
+      configs.push(documentConfig);
+    }
+    if (defaultDocumentLibrary[claimNumber]) {
+      configs.push(defaultDocumentLibrary[claimNumber]);
+    }
+    return configs;
+  }, [claimNumber, documentConfig]);
+  const primaryJsonPath = useMemo(
+    () => candidateConfigs.find(config => config.jsonPath)?.jsonPath || '',
+    [candidateConfigs]
+  );
+
   useEffect(() => {
-    if (!isOpen || claimNumber !== 'SLF DEN 9997310') {
+    if (!isOpen) {
       return;
     }
 
     setLoading(true);
+    setActiveTab('raw');
+    setExtractedData(null);
 
-    // Load PDF - try multiple paths
-    const pdfPaths = [
-      '/data/initial_agent_sample_data_from_client/2025_11_03_01.pdf',
-      '/2025_11_03_01.pdf',
-      '../data/initial_agent_sample_data_from_client/2025_11_03_01.pdf'
-    ];
-    
-    // Try to find PDF
-    const pdfPath = pdfPaths[0]; // Use first path for now
-    setPdfUrl(pdfPath);
+    const pdfCandidate = candidateConfigs.find(config => config.pdfPath)?.pdfPath || null;
+    setPdfUrl(pdfCandidate);
 
-    // Load extracted JSON - try multiple paths
-    const jsonPaths = [
-      '/data/initial_agent_sample_data_from_client/extracted_data/2025_11_03_01.json',
-      '/extracted_data/2025_11_03_01.json',
-      '../data/initial_agent_sample_data_from_client/extracted_data/2025_11_03_01.json'
-    ];
-    
+    const jsonCandidates = candidateConfigs
+      .map(config => config.jsonPath)
+      .filter((path): path is string => Boolean(path));
+
+    if (jsonCandidates.length === 0) {
+      console.warn('No JSON paths available for claim:', claimNumber);
+      setLoading(false);
+      return;
+    }
+
     // Try each path until one works
     const tryLoadJson = async (paths: string[], index: number = 0) => {
       if (index >= paths.length) {
-        console.error('Failed to load JSON from all paths:', paths);
+        console.error('Failed to load JSON from all candidate paths:', paths);
         setLoading(false);
         return;
       }
@@ -61,7 +95,9 @@ function ExtractionViewer({ isOpen, onClose, claimNumber, patientName }: Extract
         }
         
         const text = await response.text();
-        console.log('Raw response from', paths[index], ':', text.substring(0, 200));
+        if (process.env.NODE_ENV === 'development') {
+          console.log('Raw response from', paths[index], ':', text.substring(0, 200));
+        }
         
         // Clean the JSON text - properly escape control characters within string values
         // This function escapes control characters in JSON string values
@@ -121,7 +157,9 @@ function ExtractionViewer({ isOpen, onClose, claimNumber, patientName }: Extract
         
         const cleanedText = cleanJsonString(text);
         const data = JSON.parse(cleanedText);
-        console.log('Successfully loaded JSON from:', paths[index]);
+        if (process.env.NODE_ENV === 'development') {
+          console.log('Successfully loaded JSON from:', paths[index]);
+        }
         setExtractedData(data);
         setLoading(false);
       } catch (error) {
@@ -131,8 +169,14 @@ function ExtractionViewer({ isOpen, onClose, claimNumber, patientName }: Extract
       }
     };
     
-    tryLoadJson(jsonPaths);
-  }, [isOpen, claimNumber]);
+    tryLoadJson(jsonCandidates);
+  }, [isOpen, claimNumber, candidateConfigs]);
+
+  useEffect(() => {
+    if (!isOpen) {
+      setPdfUrl(null);
+    }
+  }, [isOpen]);
 
   if (!isOpen) {
     return null;
@@ -229,7 +273,7 @@ function ExtractionViewer({ isOpen, onClose, claimNumber, patientName }: Extract
                           Failed to load extracted data. Please check the console for errors.
                         </p>
                         <p style={{ color: '#999', textAlign: 'center', fontSize: '12px' }}>
-                          Expected path: /data/initial_agent_sample_data_from_client/extracted_data/2025_11_03_01.json
+                          Expected path: {primaryJsonPath || 'No JSON path configured'}
                         </p>
                       </div>
                     )}
