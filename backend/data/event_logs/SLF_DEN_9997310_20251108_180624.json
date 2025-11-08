@@ -1,0 +1,18 @@
+{
+  "claim_number": "SLF DEN 9997310",
+  "patient_name": "AMELIA JOHNSON",
+  "timestamp": "2025-11-08T18:06:24.616979",
+  "events": [
+    {
+      "timestamp": 1762643182106,
+      "fromNodeId": null,
+      "toNodeId": "start",
+      "reason": "Simulation started"
+    },
+    {
+      "timestamp": 1762643182607,
+      "fromNodeId": "start",
+      "toNodeId": "ingestion"
+    }
+  ]
+}
