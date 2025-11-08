@@ -42,7 +42,7 @@ class PDFIngestionService:
             "https://mirakalous-ai-rnd.services.ai.azure.com/providers/mistral/azure/ocr",
         )
         if self.mistral_endpoint:
-            self.mistral_endpoint = self.mistral_endpoint.lstrip("@")
+            self.mistral_endpoint = self.mistral_endpoint.lstrip("@").strip()
         self.mistral_key = os.getenv("MISTRAL_KEY")
 
         self.configured = bool(
@@ -155,13 +155,7 @@ class PDFIngestionService:
 
             for index in range(min(total_pages, max_pages)):
                 page = pdf[index]
-                bitmap = page.render(
-                    scale=scale,
-                    rotation=0,
-                    crop=(0, 0, 0, 0),
-                    greyscale=False,
-                    annotations=False,
-                )
+                bitmap = page.render(scale=scale)
                 pil_image: Image.Image = bitmap.to_pil()
 
                 buffer = io.BytesIO()
