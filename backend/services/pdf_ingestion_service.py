@@ -41,6 +41,8 @@ class PDFIngestionService:
             "MISTRAL_OCR_ENDPOINT",
             "https://mirakalous-ai-rnd.services.ai.azure.com/providers/mistral/azure/ocr",
         )
+        if self.mistral_endpoint:
+            self.mistral_endpoint = self.mistral_endpoint.lstrip("@")
         self.mistral_key = os.getenv("MISTRAL_KEY")
 
         self.configured = bool(
@@ -157,9 +159,8 @@ class PDFIngestionService:
                     scale=scale,
                     rotation=0,
                     crop=(0, 0, 0, 0),
-                    color=pdfium.Colorspace.RGB,
                     greyscale=False,
-                    annot=False,
+                    annotations=False,
                 )
                 pil_image: Image.Image = bitmap.to_pil()
 
@@ -198,7 +199,7 @@ class PDFIngestionService:
                     "type": "document_url",
                     "document_url": f"data:application/pdf;base64,{pdf_base64}",
                 },
-                "include_image_base64": False,
+                "include_image_base64": True,
             }
 
             headers = {
