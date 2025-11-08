@@ -1,3 +1,4 @@
+import base64
 import io
 import json
 import logging
@@ -8,6 +9,8 @@ from typing import Any, Dict, List, Optional, Tuple
 import requests
 from dotenv import load_dotenv
 from pypdf import PdfReader
+import pypdfium2 as pdfium
+from PIL import Image
 
 
 logger = logging.getLogger(__name__)
@@ -52,10 +55,12 @@ class PDFIngestionService:
             )
 
         text, metadata = self._extract_pdf_text(pdf_bytes)
+        page_images, image_info = self._render_pdf_images(pdf_bytes)
+        metadata.update(image_info)
         if not text.strip():
             raise ValueError("Unable to extract readable text from PDF.")
 
-        messages = self._build_prompt(text, file_name, metadata)
+        messages = self._build_prompt(text, file_name, metadata, page_images)
 
         raw_response = self._call_azure_openai(messages)
 
@@ -101,6 +106,56 @@ class PDFIngestionService:
 
         return truncated_text, metadata
 
+    def _render_pdf_images(self, pdf_bytes: bytes) -> Tuple[List[str], Dict[str, Any]]:
+        """
+        Render PDF pages into base64-encoded JPEG images for multimodal extraction.
+        """
+        images: List[str] = []
+        image_info: Dict[str, Any] = {
+            "rendered_page_count": 0,
+            "max_pages": 0,
+            "image_resolution": None,
+        }
+        try:
+            pdf = pdfium.PdfDocument(io.BytesIO(pdf_bytes))
+            total_pages = len(pdf)
+            max_pages = int(os.getenv("PDF_INGESTION_MAX_PAGES", "3"))
+            image_info["max_pages"] = max_pages
+
+            scale = float(os.getenv("PDF_INGESTION_RENDER_SCALE", "2.0"))
+
+            for index in range(min(total_pages, max_pages)):
+                page = pdf[index]
+                pil_image: Image.Image = page.render_topil(
+                    scale=scale,
+                    rotation=0,
+                    crop=(0, 0, 0, 0),
+                    color=pdfium.Colorspace.RGB,
+                    annot=False,
+                    greyscale=False,
+                )
+
+                buffer = io.BytesIO()
+                pil_image.save(buffer, format="JPEG", quality=85)
+                encoded = base64.b64encode(buffer.getvalue()).decode("utf-8")
+                images.append(encoded)
+
+                if image_info["image_resolution"] is None:
+                    image_info["image_resolution"] = {
+                        "width": pil_image.width,
+                        "height": pil_image.height,
+                        "scale": scale,
+                    }
+
+                page.close()
+
+            pdf.close()
+            image_info["rendered_page_count"] = len(images)
+        except Exception as exc:  # pragma: no cover - defensive
+            logger.warning("Failed to render PDF pages for vision prompt: %s", exc)
+
+        return images, image_info
+
     def _load_reference_examples(self, paths: List[Path]) -> List[Dict[str, Any]]:
         examples: List[Dict[str, Any]] = []
         for path in paths:
@@ -114,8 +169,12 @@ class PDFIngestionService:
         return examples[:2]  # limit to keep prompt compact
 
     def _build_prompt(
-        self, document_text: str, file_name: str, metadata: Dict[str, Any]
-    ) -> List[Dict[str, str]]:
+        self,
+        document_text: str,
+        file_name: str,
+        metadata: Dict[str, Any],
+        page_images: List[str],
+    ) -> List[Dict[str, Any]]:
         """
         Construct chat messages for Azure OpenAI with guidance and examples.
         """
@@ -157,14 +216,26 @@ class PDFIngestionService:
             f"Document content begins below:\n{document_text}"
         )
 
-        messages: List[Dict[str, str]] = [
-            {"role": "system", "content": instructions},
-        ]
-
+        system_content: List[Dict[str, str]] = [{"type": "text", "text": instructions}]
         if examples_snippet:
-            messages.append({"role": "system", "content": examples_snippet})
+            system_content.append({"type": "text", "text": examples_snippet})
 
-        messages.append({"role": "user", "content": user_prompt})
+        user_content: List[Dict[str, Any]] = [{"type": "text", "text": user_prompt}]
+
+        for idx, image_b64 in enumerate(page_images):
+            user_content.append(
+                {
+                    "type": "image_base64",
+                    "image_base64": image_b64,
+                    "mime_type": "image/jpeg",
+                    "page_index": idx,
+                }
+            )
+
+        messages: List[Dict[str, Any]] = [
+            {"role": "system", "content": system_content},
+            {"role": "user", "content": user_content},
+        ]
         return messages
 
     def _call_azure_openai(self, messages: List[Dict[str, str]]) -> str:

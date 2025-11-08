@@ -48,8 +48,11 @@ pip install -r requirements.txt
    AZURE_OPENAI_KEY=your-api-key-here
    AZURE_OPENAI_MODEL=gpt-4
    AZURE_OPENAI_DEPLOYMENT=gpt-4
-AZURE_OPENAI_PDF_DEPLOYMENT=gpt-4o-mini    # Optional dedicated deployment for PDF ingestion
-AZURE_OPENAI_API_VERSION=2024-02-15-preview
+   AZURE_OPENAI_PDF_DEPLOYMENT=gpt-4o-mini    # Optional dedicated deployment for PDF ingestion
+   AZURE_OPENAI_API_VERSION=2024-02-15-preview
+   PDF_INGESTION_MAX_CHARS=20000
+   PDF_INGESTION_MAX_PAGES=3
+   PDF_INGESTION_RENDER_SCALE=2.0
    ```
 
 ## Running the Server
@@ -188,6 +191,8 @@ The services use the following environment variables in `backend/.env`:
 - `AZURE_OPENAI_PDF_DEPLOYMENT`: Optional deployment name dedicated to PDF ingestion (falls back to `AZURE_OPENAI_DEPLOYMENT`)
 - `AZURE_OPENAI_API_VERSION`: Azure OpenAI API version (default: 2024-02-15-preview)
 - `PDF_INGESTION_MAX_CHARS`: Optional character limit applied when sending PDF text to the model (default: 20000)
+- `PDF_INGESTION_MAX_PAGES`: Optional cap on the number of PDF pages rendered into images for the multimodal prompt (default: 3)
+- `PDF_INGESTION_RENDER_SCALE`: Scaling factor when rasterizing PDF pages (default: 2.0)
 
 **Note**: The service requires Azure OpenAI to be configured. If not configured, it will return clear error messages instead of fallback responses.
 
