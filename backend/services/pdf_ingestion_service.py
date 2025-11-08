@@ -327,9 +327,8 @@ class PDFIngestionService:
         for idx, image_b64 in enumerate(page_images):
             user_content.append(
                 {
-                    "type": "image_base64",
-                    "image_base64": image_b64,
-                    "mime_type": "image/jpeg",
+                    "type": "image_url",
+                    "image_url": f"data:image/jpeg;base64,{image_b64}",
                     "page_index": idx,
                 }
             )
