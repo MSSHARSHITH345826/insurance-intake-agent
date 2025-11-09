@@ -28,7 +28,8 @@ app.add_middleware(
         "http://localhost:3030", 
         "http://localhost:3031", 
         "http://localhost:5173",
-        "http://localhost:8004"  # Backend port
+        "http://localhost:8004",  # Backend port
+        "https://sunlifeintakewebstore.z9.web.core.windows.net"
     ],
     allow_credentials=True,
     allow_methods=["*"],
