@@ -61,15 +61,17 @@ pip install -r requirements.txt
 ### Development Mode
 
 ```bash
-uvicorn main:app --reload --host 0.0.0.0 --port 8000
+uvicorn main:app --reload --host 0.0.0.0 --port 8004
 ```
 
-The API will be available at `http://localhost:8000`
+The API will be available at:
+- Local: `http://localhost:8004`
+- Network: `http://155.17.172.33:8004`
 
 ### Production Mode
 
 ```bash
-uvicorn main:app --host 0.0.0.0 --port 8000
+uvicorn main:app --host 0.0.0.0 --port 8004
 ```
 
 ## API Endpoints
@@ -148,7 +150,7 @@ Upload a PDF dental/medical claim document and receive structured JSON extracted
 
 **curl example**
 ```bash
-curl -X POST http://localhost:8000/api/pdf-ingestion \
+curl -X POST http://localhost:8004/api/pdf-ingestion \
   -F "file=@data/pend_data/Scenario\ 1/Sunlife\ Sample\ 1\ (Additional\ document).pdf"
 ```
 
@@ -178,8 +180,8 @@ curl -X POST http://localhost:8000/api/pdf-ingestion \
 ## API Documentation
 
 Once the server is running, you can access:
-- **Swagger UI**: `http://localhost:8000/docs`
-- **ReDoc**: `http://localhost:8000/redoc`
+- **Swagger UI**: `http://localhost:8004/docs` (or `http://155.17.172.33:8004/docs` from network)
+- **ReDoc**: `http://localhost:8004/redoc` (or `http://155.17.172.33:8004/redoc` from network)
 
 ## Configuration
 
@@ -207,6 +209,8 @@ The API is configured to allow requests from:
 - `http://localhost:3030`
 - `http://localhost:3031`
 - `http://localhost:5173`
+- `http://155.17.172.33:3030` (Frontend on network IP)
+- `http://155.17.172.33:8004` (Backend on network IP)
 
 To add more origins, edit the CORS configuration in `main.py`.
 

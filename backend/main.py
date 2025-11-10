@@ -29,6 +29,8 @@ app.add_middleware(
         "http://localhost:3031", 
         "http://localhost:5173",
         "http://localhost:8004",  # Backend port
+        "http://155.17.172.33:3030",  # Frontend on network IP
+        "http://155.17.172.33:8004",  # Backend on network IP
         "https://sunlifeintakewebstore.z9.web.core.windows.net"
     ],
     allow_credentials=True,
@@ -209,5 +211,5 @@ async def get_event_log(claim_number: str):
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    uvicorn.run(app, host="0.0.0.0", port=8004)
 

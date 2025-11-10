@@ -121,7 +121,9 @@ npm install
 npm run dev
 ```
 
-The application will be available at `http://localhost:3030`
+The application will be available at:
+- Local: `http://localhost:3030`
+- Network: `http://155.17.172.33:3030`
 
 ### Build for Production
 
@@ -225,7 +227,9 @@ AZURE_OPENAI_DEPLOYMENT=gpt-4
 uvicorn main:app --reload --host 0.0.0.0 --port 8004
 ```
 
-The API will be available at `http://localhost:8004`
+The API will be available at:
+- Local: `http://localhost:8004`
+- Network: `http://155.17.172.33:8004`
 
 ## Claims Process Agent
 

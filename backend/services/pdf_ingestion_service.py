@@ -347,8 +347,8 @@ class PDFIngestionService:
         Send the prompt to Azure OpenAI and return the raw response text.
         """
         api_endpoint = (
-            f"{self.openai_endpoint.rstrip('/')}/openai/deployments/"
-            f"{self.openai_deployment}/chat/completions?api-version={self.api_version}"
+            f"{self.openai_endpoint}"
+           
         )
 
         headers = {

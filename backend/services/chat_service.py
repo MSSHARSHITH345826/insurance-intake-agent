@@ -293,7 +293,7 @@ Please help the user with their questions."""
         """
         try:
             # Prepare the API endpoint
-            api_endpoint = f"{self.openai_endpoint.rstrip('/')}/openai/deployments/{self.openai_deployment}/chat/completions?api-version=2024-02-15-preview"
+            api_endpoint = f"{self.openai_endpoint}"
             
             # Headers
             headers = {

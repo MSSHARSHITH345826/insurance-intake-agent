@@ -183,7 +183,7 @@ function ExtractionViewer({ isOpen, onClose, claimNumber, patientName, documentC
         formData.append('file', pdfFile);
 
         const baseUrl =
-          import.meta.env.VITE_BACKEND_URL?.replace(/\/$/, '') || 'http://localhost:8004';
+          import.meta.env.VITE_BACKEND_URL?.replace(/\/$/, '') || 'http://155.17.172.33:8004';
         const response = await fetch(`${baseUrl}/api/pdf-ingestion`, {
           method: 'POST',
           body: formData,

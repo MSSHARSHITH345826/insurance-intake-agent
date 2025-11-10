@@ -121,7 +121,8 @@ function ClaimsSimulatorInner({ claim }: ClaimsSimulatorProps) {
     // Debounce saves - only save when event log has new entries
     const saveEventLog = async () => {
       try {
-        const response = await fetch('http://localhost:8004/api/event-log', {
+        const backendUrl = import.meta.env.VITE_BACKEND_URL || 'http://155.17.172.33:8004';
+        const response = await fetch(`${backendUrl}/api/event-log`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
